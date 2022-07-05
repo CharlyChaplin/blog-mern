@@ -4,6 +4,7 @@ import { registerValidation, loginValidation, postCreateValidation } from "./val
 import { UserController, PostController } from "./controllers/index.js";
 import {checkAuth, handleValidationErrors} from './utils/index.js';
 import multer from "multer";
+import cors from 'cors';
 
 mongoose
 	.connect('mongodb+srv://admin:wwwwww@cluster0.dezs5xl.mongodb.net/blog?retryWrites=true&w=majority')
@@ -28,6 +29,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 app.use(express.json());
+app.use(cors());
 //express считает, что обращаясь к http://localhost:4444/uploads/image.img
 //что это роут и начинает искать нижеследующие роуты. Нужно объяснить, что
 //есть папка, в которой хранятся статичные файлы.
