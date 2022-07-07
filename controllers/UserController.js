@@ -32,9 +32,9 @@ export const register = async (req, res) => {
 			...userData,
 			token
 		});
-		res.json({
-			success: true,
-		});
+		//res.json({
+		//	success: true,
+		//});
 	} catch (err) {
 		console.log(err);
 		res.status(500).json({
