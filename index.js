@@ -36,7 +36,7 @@ app.use(cors());
 //Говорим, что если придёт любой запрос на роут upload
 //.static говорит, что ты делаешь не просто get-запрос,
 //а делаешь get-запрос на получение статичного файла
-app.use('/uploads', express.static('uploads'));
+app.use('/upload', express.static('uploads'));
 
 app.post('/auth/login', loginValidation, handleValidationErrors, UserController.login)
 app.post('/auth/register', registerValidation, handleValidationErrors, UserController.register)
@@ -47,11 +47,11 @@ app.get('/auth/me', checkAuth, UserController.getMe)
 //и скажем, что мы ожидаем файл под названием image. То есть мы будем
 //ожидать свойство image с какой-то картинкой. Если такой файл придёт,
 //то через запятую активируется (req, res)
-app.post('/uploads', checkAuth, upload.single('image'), (req, res) => {
+app.post('/upload', checkAuth, upload.single('image'), (req, res) => {
 	//и что нам необходимо передать url, т.е. вернём клиенту
 	//по какому пути сохранилась картинка
 	res.json({
-		url: `/uploads/${req.file.originalname}`
+		url: `/upload/${req.file.originalname}`
 	})
 })
 app.get('/tags', PostController.getLastTags);
