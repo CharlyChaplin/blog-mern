@@ -4,6 +4,7 @@ import { registerValidation, loginValidation, postCreateValidation } from "./val
 import { UserController, PostController } from "./controllers/index.js";
 import {checkAuth, handleValidationErrors} from './utils/index.js';
 import multer from "multer";
+import fs from 'fs';
 import cors from 'cors';
 
 mongoose
@@ -18,6 +19,7 @@ const storage = multer.diskStorage({
 	destination: (_, __, cb) => {
 		//эта функция мне должна сказать, что она не получает никаких ошибок,
 		//и говорю, что нужно сохранить файлы в папку uploads
+		if (!fs.existsSync('uploads')) fs.mkdir('uploads');
 		cb(null, 'uploads')
 	},
 	filename: (_, file, cb) => {
