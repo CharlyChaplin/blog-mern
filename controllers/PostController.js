@@ -1,4 +1,3 @@
-import { json } from 'express';
 import PostModel from '../models/Post.js'
 
 export const getAll = async (req, res) => {
@@ -110,7 +109,7 @@ export const create = async (req, res) => {
 			title: req.body.title,
 			text: req.body.text,
 			imageUrl: req.body.imageUrl,
-			tags: req.body.tags,
+			tags: req.body.tags.split(',').map(obj => obj.trim()),
 			user: req.userId,
 		});
 
@@ -138,7 +137,7 @@ export const update = async (req, res) => {
 				text: req.body.text,
 				imageUrl: req.body.imageUrl,
 				user: req.userId,
-				tags: req.body.tags
+				tags: req.body.tags.split(',').map(obj => obj.trim()),
 			});
 
 		res.json({
